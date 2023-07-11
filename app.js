@@ -20,10 +20,10 @@ app.use(express.urlencoded({ extended: true }))
 
 app.get('/mean', function(request, response, next) {
     try {
-        const nums = (request.query.nums).split(',')
-        if(!nums) {
+        if(!request.query.nums) {
             throw new ExpressError("No numbers found. Please provide numbers", 400)
         }
+        const nums = (request.query.nums).split(',')
         if(nums.length === 1) {
             throw new ExpressError("Only one number found. Please provide multiple numbers", 400)
         }
@@ -43,10 +43,10 @@ app.get('/mean', function(request, response, next) {
 
 app.get('/median', function(request, response, next) {
     try {
-        const nums = (request.query.nums).split(',')
-        if(!nums) {
+        if(!request.query.nums) {
             throw new ExpressError("No numbers found. Please provide numbers", 400)
         }
+        const nums = (request.query.nums).split(',')
         if(nums.length === 1) {
             throw new ExpressError("Only one number found. Please provide multiple numbers", 400)
         }
@@ -71,12 +71,12 @@ app.get('/median', function(request, response, next) {
 
 app.get('/mode', function(request, response, next) {
     try {
+        if(!request.query.nums) {
+            throw new ExpressError("No numbers found. Please provide numbers", 400)
+        }
         const nums = (request.query.nums).split(',')
         let most
         let countOfMost = 0
-        if(!nums) {
-            throw new ExpressError("No numbers found. Please provide numbers", 400)
-        }
         if(nums.length === 1) {
             throw new ExpressError("Only one number found. Please provide multiple numbers", 400)
         }
